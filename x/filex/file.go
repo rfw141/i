@@ -2,7 +2,9 @@ package filex
 
 import (
 	"github.com/rfw141/i/log"
+	"github.com/rfw141/i/x/errorx"
 	"os"
+	"path/filepath"
 )
 
 func Exist(filename string) bool {
@@ -32,6 +34,18 @@ func Read(filename string) ([]byte, error) {
 	return content, nil
 }
 
+func MustRead(filename string) []byte {
+	content, err := Read(filename)
+	errorx.Must(err)
+	return content
+}
+
+func MustReadStr(filename string) string {
+	content, err := Read(filename)
+	errorx.Must(err)
+	return string(content)
+}
+
 func Write(filename, content string) error {
 	f, err := os.Create(filename)
 	if err != nil {
@@ -48,4 +62,13 @@ func Write(filename, content string) error {
 		return err
 	}
 	return nil
+}
+
+func MustWrite(filename, content string) {
+	err := Write(filename, content)
+	errorx.Must(err)
+}
+
+func Path(paths ...string) string {
+	return filepath.ToSlash(filepath.Join(paths...))
 }

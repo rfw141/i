@@ -3,6 +3,7 @@ package protox
 import (
 	"github.com/emicklei/proto"
 	"github.com/rfw141/i/log"
+	"github.com/rfw141/i/x/errorx"
 	"os"
 )
 
@@ -25,4 +26,10 @@ func GetDefinition(protoPath string) (*proto.Proto, error) {
 		return nil, err
 	}
 	return definition, nil
+}
+
+func MustGetDefinition(protoPath string) *proto.Proto {
+	definition, err := GetDefinition(protoPath)
+	errorx.Must(err)
+	return definition
 }

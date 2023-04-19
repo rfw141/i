@@ -50,6 +50,8 @@ func (c *Cmd) RegisterExecutors(executors []Executor) {
 				}
 				ctx := NewCmdCtx()
 				ctx.req = parseArgs(args)
+				// todo
+				log.Warnf("req: %v", ctx.req)
 				rsp, err := nExecutor.ExecHandler(ctx)
 				if err != nil {
 					log.Errorf("exec %s error: %v", use, err)
@@ -76,7 +78,7 @@ func parseArgs(args []string) string {
 				strings.HasPrefix(val, "\"") && strings.HasSuffix(val, "\""),
 				strings.HasPrefix(val, "{") && strings.HasSuffix(val, "}"),
 				strings.HasPrefix(val, "[") && strings.HasSuffix(val, "]"),
-				regexp.MustCompile(`\d`).MatchString(val):
+				regexp.MustCompile(`^[0-9]+$`).MatchString(val):
 				req, _ = sjson.SetRaw(req, key, val)
 			default:
 				req, _ = sjson.Set(req, key, val)

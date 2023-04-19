@@ -46,7 +46,7 @@ type Svr struct {
 	*Cfg
 	*Addrs
 	handlers map[string]Handler
-	rpcs  map[string]*Rpc
+	rpcs     map[string]*Rpc
 }
 
 func NewSvr(cfg *Cfg, addrs *Addrs, rpcs map[string]*Rpc) *Svr {

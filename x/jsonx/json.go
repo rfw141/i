@@ -33,3 +33,7 @@ func MustMarshal(v interface{}) []byte {
 	errorx.Must(err)
 	return data
 }
+
+func MustMarshalStr(v interface{}) string {
+	return string(MustMarshal(v))
+}

@@ -83,7 +83,6 @@ func (c *Cfg) GetStr(key string, def string) string {
 
 func (c *Cfg) GetJsonData(key string, out interface{}) error {
 	if !c.v.IsSet(key) {
-		log.Warnf("%s not found", key)
 		return ErrConfigNotFound
 	}
 

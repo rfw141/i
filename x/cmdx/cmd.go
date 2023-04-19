@@ -3,6 +3,7 @@ package cmdx
 import (
 	"bytes"
 	"github.com/rfw141/i/log"
+	"github.com/rfw141/i/x/errorx"
 	"os/exec"
 	"strings"
 )
@@ -27,4 +28,9 @@ func Run(name string, args ...string) error {
 		log.Infof("cmd out: %s", out.String())
 	}
 	return nil
+}
+
+func MustRun(name string, args ...string) {
+	err := Run(name, args...)
+	errorx.Must(err)
 }

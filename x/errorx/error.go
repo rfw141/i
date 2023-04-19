@@ -22,7 +22,7 @@ func (e *E) GetMsg() string {
 	return e.Msg
 }
 func (e *E) Error() string {
-	return fmt.Sprintf("code:%d, msg:%s", e.Code, e.Msg)
+	return fmt.Sprintf("code(%d), msg(%s)", e.Code, e.Msg)
 }
 
 func GetMsg(errmsg ...interface{}) string {
@@ -50,7 +50,7 @@ func Error(code int32, msg ...interface{}) error {
 
 func New(msg ...interface{}) error {
 	err := &E{Code: -1, Msg: GetMsg(msg...)}
-	log.Logf(log.ERROR, &log.Option{AddSourceSkip: 1}, "err:%v", err)
+	log.Logf(log.ERROR, &log.Option{AddSourceSkip: 1}, "%v", err)
 	return err
 }
 
