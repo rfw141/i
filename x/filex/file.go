@@ -47,6 +47,9 @@ func MustReadStr(filename string) string {
 }
 
 func Write(filename, content string) error {
+	if err := os.MkdirAll(filepath.Dir(filename), 0755); err != nil {
+		return err
+	}
 	f, err := os.Create(filename)
 	if err != nil {
 		return err
